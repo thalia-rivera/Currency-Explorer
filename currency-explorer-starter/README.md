@@ -9,8 +9,8 @@
 |---|---|---|---|
 | 04 | Sugey Gutierrez| Thalia Rivera| Misión 04: Monedas dinámicas con selectores de origen y destino |
 | 05 | Thalia Rivera | Sugey Gutierrez | Mision 05: Conversion completa, integrar y dar formato legible al resultado |
-| 06 | | | |
-| 07 | | | |
+| 06 | Sugey Gutierrez| Sugey Gutierrez | Misión 6: Botón para intercambiar monedas y recalcular |
+| 07 | Thalia Rivera| Sugey Gutierrez | Misión 7: Validar todos los posibles casos de datos ingresados no validos |
 | 08 | Sugey Gutiérrez| Thalia Rivera|Misión 08: Estado de carga y botones deshabilitados durante la consulta |
 | 09 | | | |
 | 10 | | | |
@@ -31,7 +31,13 @@ Endpoint de referencia:
 ## Decisiones técnicas
 Registra aquí al menos dos decisiones tomadas por la pareja y explica por qué.
 
-1. 
+1. Separamos la validación en una función `validarEntrada()`.
+   Necesitamos validar la cantidad y las monedas porque el usuario puede escribir
+   datos que no se pueden convertir. La pusimos en una función aparte, y no dentro
+   de `convertirMoneda()`, porque así cada función tiene una sola responsabilidad:
+   una valida y la otra consulta la API y muestra el resultado. Además, devuelve
+   `null` si hay error, lo que permite a `convertirMoneda()` detenerse con un
+   solo `if`, y facilita probar los casos por separado.
 2. 
 
 ## Revisión cruzada

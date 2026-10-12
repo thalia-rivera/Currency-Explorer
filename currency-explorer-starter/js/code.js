@@ -22,13 +22,11 @@ async function convertirMoneda() {
   // Misiones guiadas 1-3: ya existe un flujo mínimo funcional EUR -> USD.
   // A partir de la Misión 4 debes convertirlo en una solución dinámica.
 
-  const valor = Number(cantidad.value);
+ 
 
   // TODO · MISIÓN 07: sustituir esta validación mínima por una validación completa.
-  if (!Number.isFinite(valor) || valor <= 0) {
-    mostrarError("Escribe una cantidad mayor que cero.");
-    return;
-  }
+  const valor = validarEntrada();
+  if (valor === null) return;
 
   // TODO · MISIÓN 04: reemplazar EUR y USD por los valores elegidos en los <select>.
 
@@ -88,10 +86,43 @@ const temporal = origen.value;
 }
 
 // 4. UTILIDADES DE INTERFAZ
+// 4. UTILIDADES DE INTERFAZ
 function mostrarError(mensaje) {
   resultado.classList.add("error");
   resultadoTexto.textContent = mensaje;
   detalleTasa.textContent = "Revisa los datos e inténtalo nuevamente.";
+}
+
+function validarEntrada() {
+  const texto = cantidad.value.trim();
+
+  // 1) Campo vacío (se revisa antes de Number(), porque Number("") también da 0)
+  if (texto === "") {
+    mostrarError("Escribe una cantidad para convertir.");
+    return null;
+  }
+
+  const valor = Number(texto);
+
+  // 2) No es un número válido
+  if (!Number.isFinite(valor)) {
+    mostrarError("La cantidad no es un número válido.");
+    return null;
+  }
+
+  // 3) Cero o negativo
+  if (valor <= 0) {
+    mostrarError("La cantidad debe ser mayor que cero.");
+    return null;
+  }
+
+  // 4) Misma moneda en origen y destino
+  if (origen.value === destino.value) {
+    mostrarError("Elige monedas distintas en origen y destino.");
+    return null;
+  }
+
+  return valor;
 }
 
 // PISTA PARA EL RETO:
