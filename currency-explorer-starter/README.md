@@ -13,7 +13,8 @@
 | 07 | Thalia Rivera| Sugey Gutierrez | Misión 7: Validar todos los posibles casos de datos ingresados no validos |
 | 08 | Sugey Gutiérrez| Thalia Rivera |Misión 08: Estado de carga y botones deshabilitados durante la consulta |
 | 09 | Thalia Rivera|Sugey Gutierrez |Mision 09: Manejo de errores con response.ok y try/catch |
-| 10 | | | |
+| 10 | Sugey Guitierrez | Thalia Rivera |Misión 10: Diseño responsive, selectores apilados en móvil y controles táctiles  |
+| 11 | Thalia Rivera| Sugey Gutierrez |Misión 11: Grafica con datos historicos  |
 
 ## Objetivo
 Completar una aplicación frontend que consuma Frankfurter API para convertir divisas y demostrar comprensión de eventos, DOM, `fetch()`, JSON, asincronía, validación y manejo de errores.
@@ -38,15 +39,33 @@ Registra aquí al menos dos decisiones tomadas por la pareja y explica por qué.
    una valida y la otra consulta la API y muestra el resultado. Además, devuelve
    `null` si hay error, lo que permite a `convertirMoneda()` detenerse con un
    solo `if`, y facilita probar los casos por separado.
+
+2. Desidimos que convertir a la misma monera no tiene sentido y la API puede responder con error, así
+  que lo validamos antes de hacer la petición para no gastar una consulta.
+
+3. Después de intercambiar las monedas, el resultado anterior ya no era
+   correcto. Por eso `intercambiarMonedas()` llama a `convertirMoneda()`, y
+   el usuario ve el resultado actualizado sin dar otro clic, lo decidimos para que tuviera mayor comodidad. 
    
-2. Nos dimos cuenta de que no es lo mismo que falle el internet a que la
+4. Nos dimos cuenta de que no es lo mismo que falle el internet a que la
    moneda sea inválida, así que en el `catch` mostramos un mensaje diferente
    para cada caso. Así el usuario sabe qué pasó y qué puede hacer. Esto da mayor manejo 
    en los posibles errores que se presenten al usuario.
-   
+
+5. Usamos el elemento `<canvas>` La API nos devuelve varios registros (uno por mes), y con `map()` los
+   separamos en dos arreglos: uno con las fechas y otro con las tasas. Luego
+   calculamos la posición de cada punto usando el valor mínimo y el máximo,
+   para que la línea use todo el espacio. 
+
+6. En un momento Git rechazó nuestro push porque la otra persona había subido
+   cambios. Entendimos que había que traer sus cambios primero, y desde
+   entonces nos avisamos quién edita `code.js` para evitar choques, aunque de todos mdoos tuvimos algunos
+   inconvenientes
+
+
 
 ## Revisión cruzada
-- Aspecto bien resuelto:
+- Aspecto bien resuelto: 
 - Error o comportamiento mejorable:
 - Propuesta de mejora:
 - Cambio incorporado después de la revisión:

@@ -133,6 +133,108 @@ function validarEntrada() {
   return valor;
 }
 
+// MISIÓN 11: HISTÓRICO dibujada en canvas
+const btnHistorico = document.querySelector("#verHistorico");
+const lienzo = document.querySelector("#grafica");
+
+btnHistorico.addEventListener("click", cargarHistorico);
+
+async function cargarHistorico() {
+  const base = origen.value;
+  const quote = destino.value;
+
+  if (base === quote) {
+    mostrarError("Elige monedas distintas para ver el histórico.");
+    return;
+  }
+
+  const url = `https://api.frankfurter.dev/v2/rates?base=${base}&quotes=${quote}&from=2026-01-01&group=month`;
+
+  try {
+    btnHistorico.disabled = true;
+    btnHistorico.textContent = "Consultando...";
+
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) {
+      throw new Error(`HTTP_${respuesta.status}`);
+    }
+
+    const datos = await respuesta.json();
+
+    // Los dos arreglos que necesita la gráfica, los cuales se obtienen de los datos de la API.
+    const fechas = datos.map(item => item.date);
+    const tasas = datos.map(item => item.rate);
+
+    dibujarGrafica(fechas, tasas, `${base} → ${quote}`);
+  } catch (error) {
+    console.error(error);
+    mostrarError("No fue posible cargar el histórico.");
+  } finally {
+    btnHistorico.disabled = false;
+    btnHistorico.textContent = "Ver histórico";
+  }
+}
+
+function dibujarGrafica(fechas, tasas, titulo) {
+  const ctx = lienzo.getContext("2d");
+  const ancho = lienzo.width;
+  const alto = lienzo.height;
+  const margen = 50;
+
+  ctx.clearRect(0, 0, ancho, alto); // borra la gráfica anterior
+
+  // Valores mínimo y máximo para escalar el eje Y
+  const min = Math.min(...tasas);
+  const max = Math.max(...tasas);
+  const rango = max - min || 1; // evita dividir entre 0
+
+  // Convierten un dato en una posición del canvas
+  const posX = i => margen + i * (ancho - 2 * margen) / Math.max(tasas.length - 1, 1);
+  const posY = t => alto - margen - ((t - min) / rango) * (alto - 2 * margen);
+
+  ctx.font = "12px sans-serif";
+  ctx.fillStyle = "#888";
+  ctx.strokeStyle = "#888";
+  ctx.lineWidth = 1;
+
+  // Título
+  ctx.fillText(titulo, margen, 25);
+
+  // Ejes
+  ctx.beginPath();
+  ctx.moveTo(margen, margen);
+  ctx.lineTo(margen, alto - margen);
+  ctx.lineTo(ancho - margen, alto - margen);
+  ctx.stroke();
+
+  // Etiquetas del eje Y (máximo y mínimo)
+  ctx.fillText(max.toFixed(4), 5, margen + 4);
+  ctx.fillText(min.toFixed(4), 5, alto - margen + 4);
+
+  // Línea de la gráfica
+  ctx.strokeStyle = "hsl(205, 48%, 51%)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  tasas.forEach((t, i) => {
+    if (i === 0) ctx.moveTo(posX(i), posY(t));
+    else ctx.lineTo(posX(i), posY(t));
+  });
+  ctx.stroke();
+
+  // Puntos y etiquetas del eje X (mes)
+  ctx.fillStyle = "rgb(9, 33, 86)";
+  tasas.forEach((t, i) => {
+    ctx.beginPath();
+    ctx.arc(posX(i), posY(t), 4, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  ctx.fillStyle = "#888";
+  fechas.forEach((f, i) => {
+    ctx.fillText(f.slice(5, 7), posX(i) - 6, alto - margen + 18); // "01", "02"...
+  });
+}
+
 // PISTA PARA EL RETO:
 // origen.value        -> moneda seleccionada como origen
 // destino.value       -> moneda seleccionada como destino
