@@ -1,8 +1,8 @@
 # Currency Explorer · Starter Project
 
 ## Integrantes
-- Estudiante A:
-- Estudiante B:
+- Estudiante A: Thalia Yazmin Rivera López 
+- Estudiante B: Sugey Guitierrez Calero
 
 ## Pair Programming
 | Misión | Driver | Navigator | Commit / evidencia |

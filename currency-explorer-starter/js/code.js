@@ -51,7 +51,6 @@ async function convertirMoneda() {
     detalleTasa.textContent = `1 ${monedaOrigen} = ${datos.rate} ${monedaDestino} · ${datos.date}`;
 //datos.rate es el número que dice cuánto vale una moneda en otra.
 
-Piénsalo como cuando vas a una casa de cambio y ves el letrero: “1 euro = 1.08 dólares”. Ese 1.08 es el rate.
   } catch (error) {
     // TODO · MISIÓN 09: mejora el mensaje y analiza qué errores pueden llegar aquí.
     mostrarError("No fue posible completar la consulta.");
