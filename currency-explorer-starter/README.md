@@ -123,7 +123,7 @@ Registra aquí al menos dos decisiones tomadas por la pareja y explica por qué.
 
 ## Reflexión final (150–200 palabras)
 
-Y ASI QUEDA LA REFLEXION FINAL El principal aprendizaje técnico fue entender cómo viaja un dato desde la API hasta la pantalla: `fetch` solicita la información, `.json()` la convierte en objeto, `datos.rate` entrega el tipo de cambio y `textContent` lo escribe en el DOM. Con las misiones convertimos ese flujo básico en una aplicación completa: monedas dinámicas, intercambio, validación, estado de carga con `finally`, manejo de errores con `try/catch` y diseño responsive con `@media`.
+ El principal aprendizaje técnico fue entender cómo viaja un dato desde la API hasta la pantalla: `fetch` solicita la información, `.json()` la convierte en objeto, `datos.rate` entrega el tipo de cambio y `textContent` lo escribe en el DOM. Con las misiones convertimos ese flujo básico en una aplicación completa: monedas dinámicas, intercambio, validación, estado de carga con `finally`, manejo de errores con `try/catch` y diseño responsive con `@media`.
 
 La dificultad más relevante fue Git. Aún no dominamos el tema y todo fue un reto: tuvimos rechazos en `git push`, conflictos de merge en `README.md` y `code.js`, y un conflicto dejó llaves desajustadas en el `try/catch` que hizo que ningún botón funcionara. Aprendimos a leer los mensajes de Git, resolver conflictos y usar la consola del navegador para encontrar errores.
 
