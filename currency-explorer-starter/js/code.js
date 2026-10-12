@@ -37,24 +37,21 @@ async function convertirMoneda() {
 
   const url = `https://api.frankfurter.dev/v2/rate/${monedaOrigen}/${monedaDestino}`;
 
- try {
-  // estado de carga
-  resultado.classList.remove("error");
-  resultadoTexto.textContent = "Consultando...";
-  detalleTasa.textContent = "Obteniendo el tipo de cambio...";
-  btnConvertir.disabled = true;
-  btnIntercambiar.disabled = true;
+     try {
+    // estado de carga
+    resultado.classList.remove("error");
+    resultadoTexto.textContent = "Consultando...";
+    detalleTasa.textContent = "Obteniendo el tipo de cambio...";
+    btnConvertir.disabled = true;
+    btnIntercambiar.disabled = true;
 
-  const respuesta = await fetch(url);
-  // ... el resto de tu código igual
-} catch (error) {
-  // ... igual
-} finally {
-  btnConvertir.disabled = false;
-  btnIntercambiar.disabled = false;
-}
+    const respuesta = await fetch(url);
 
-    // TODO · MISIÓN 09: comprobar response.ok y lanzar un error si corresponde.
+    // MISIÓN 09: comprobar response.ok y lanzar un error si corresponde.
+    if (!respuesta.ok) {
+      throw new Error(`HTTP_${respuesta.status}`);
+    }
+
     const datos = await respuesta.json();
     console.log(datos);
 
@@ -67,18 +64,29 @@ async function convertirMoneda() {
 
     detalleTasa.textContent = `1 ${monedaOrigen} = ${datos.rate.toFixed(5)} ${monedaDestino} · ${datos.date}`;
 //datos.rate es el número que dice cuánto vale una moneda en otra.
-//Piénsalo como cuando vas a una casa de cambio y ves el letrero: “1 euro = 1.08 dólares”. Ese 1.08 es el rate.
-  } 
-  catch (error) {
-
-    // TODO · MISIÓN 09: mejora el mensaje y analiza qué errores pueden llegar aquí.
-    mostrarError("No fue posible completar la consulta.");
-    console.error(error); 
+//Piénsalo como cuando vas a una casa de cambio y ves el letrero: "1 euro = 1.08 dólares". Ese 1.08 es el rate.
   }
+  catch (error) {
+    console.error(error);
 
+    if (error instanceof TypeError) {
+      mostrarError("No hay conexión con el servicio. Revisa tu internet.");
+    } else if (error.message === "HTTP_404" || error.message === "HTTP_422") {
+      mostrarError("La API no reconoce esa moneda");
+    } else if (error.message.startsWith("HTTP_")) {
+      mostrarError("El servicio tuvo un problema. Inténtalo más tarde.");
+    } else {
+      mostrarError("No fue posible completar la consulta.");
+    }
+  }
+  finally {
+    btnConvertir.disabled = false;
+    btnIntercambiar.disabled = false;
+  }
+}
 
 function intercambiarMonedas() {
-const temporal = origen.value;
+  const temporal = origen.value;
   origen.value = destino.value;
   destino.value = temporal;
 

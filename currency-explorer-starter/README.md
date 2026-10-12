@@ -11,8 +11,8 @@
 | 05 | Thalia Rivera | Sugey Gutierrez | Mision 05: Conversion completa, integrar y dar formato legible al resultado |
 | 06 | Sugey Gutierrez| Sugey Gutierrez | Misión 6: Botón para intercambiar monedas y recalcular |
 | 07 | Thalia Rivera| Sugey Gutierrez | Misión 7: Validar todos los posibles casos de datos ingresados no validos |
-| 08 | Sugey Gutiérrez| Thalia Rivera|Misión 08: Estado de carga y botones deshabilitados durante la consulta |
-| 09 | | | |
+| 08 | Sugey Gutiérrez| Thalia Rivera |Misión 08: Estado de carga y botones deshabilitados durante la consulta |
+| 09 | Thalia Rivera|Sugey Gutierrez |Mision 09: Manejo de errores con response.ok y try/catch |
 | 10 | | | |
 
 ## Objetivo
@@ -38,7 +38,12 @@ Registra aquí al menos dos decisiones tomadas por la pareja y explica por qué.
    una valida y la otra consulta la API y muestra el resultado. Además, devuelve
    `null` si hay error, lo que permite a `convertirMoneda()` detenerse con un
    solo `if`, y facilita probar los casos por separado.
-2. 
+   
+2. Nos dimos cuenta de que no es lo mismo que falle el internet a que la
+   moneda sea inválida, así que en el `catch` mostramos un mensaje diferente
+   para cada caso. Así el usuario sabe qué pasó y qué puede hacer. Esto da mayor manejo 
+   en los posibles errores que se presenten al usuario.
+   
 
 ## Revisión cruzada
 - Aspecto bien resuelto:
