@@ -39,9 +39,22 @@ async function convertirMoneda() {
 
   const url = `https://api.frankfurter.dev/v2/rate/${monedaOrigen}/${monedaDestino}`;
 
-  try {
-    // TODO · MISIÓN 08: activar un estado visual de carga antes de consultar.
-    const respuesta = await fetch(url);
+ try {
+  // estado de carga
+  resultado.classList.remove("error");
+  resultadoTexto.textContent = "Consultando...";
+  detalleTasa.textContent = "Obteniendo el tipo de cambio...";
+  btnConvertir.disabled = true;
+  btnIntercambiar.disabled = true;
+
+  const respuesta = await fetch(url);
+  // ... el resto de tu código igual
+} catch (error) {
+  // ... igual
+} finally {
+  btnConvertir.disabled = false;
+  btnIntercambiar.disabled = false;
+}
 
     // TODO · MISIÓN 09: comprobar response.ok y lanzar un error si corresponde.
     const datos = await respuesta.json();
@@ -57,12 +70,14 @@ async function convertirMoneda() {
     detalleTasa.textContent = `1 ${monedaOrigen} = ${datos.rate.toFixed(5)} ${monedaDestino} · ${datos.date}`;
 //datos.rate es el número que dice cuánto vale una moneda en otra.
 //Piénsalo como cuando vas a una casa de cambio y ves el letrero: “1 euro = 1.08 dólares”. Ese 1.08 es el rate.
-  } catch (error) {
+  } 
+  catch (error) {
+
     // TODO · MISIÓN 09: mejora el mensaje y analiza qué errores pueden llegar aquí.
     mostrarError("No fue posible completar la consulta.");
-    console.error(error);
+    console.error(error); 
   }
-}
+
 
 function intercambiarMonedas() {
 const temporal = origen.value;

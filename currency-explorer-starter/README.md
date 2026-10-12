@@ -11,7 +11,7 @@
 | 05 | Thalia Rivera | Sugey Gutierrez | Mision 05: Conversion completa, integrar y dar formato legible al resultado |
 | 06 | | | |
 | 07 | | | |
-| 08 | | | |
+| 08 | Sugey Gutiérrez| Thalia Rivera|Misión 08: Estado de carga y botones deshabilitados durante la consulta |
 | 09 | | | |
 | 10 | | | |
 
