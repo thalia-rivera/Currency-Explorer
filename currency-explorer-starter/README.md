@@ -7,8 +7,8 @@
 ## Pair Programming
 | Misión | Driver | Navigator | Commit / evidencia |
 |---|---|---|---|
-| 04 | | | |
-| 05 | | | |
+| 04 | Sugey Gutierrez| Thalia Rivera| Misión 04: Monedas dinámicas con selectores de origen y destino |
+| 05 | Thalia Rivera | Sugey Gutierrez | Mision 05: Conversion completa, integrar y dar formato legible al resultado |
 | 06 | | | |
 | 07 | | | |
 | 08 | | | |

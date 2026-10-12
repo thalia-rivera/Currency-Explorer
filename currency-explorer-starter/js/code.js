@@ -50,8 +50,11 @@ async function convertirMoneda() {
     const conversion = valor * datos.rate;
 
     resultado.classList.remove("error");
-    resultadoTexto.textContent = `${valor.toFixed(2)} ${monedaOrigen} = ${conversion.toFixed(2)} ${monedaDestino}`;
-    detalleTasa.textContent = `1 ${monedaOrigen} = ${datos.rate} ${monedaDestino} · ${datos.date}`;
+    //hacer el resultado de la conversion mas legible con toLocaleString y formato de 2 decimales y separar los miles y los decimales con coma y punto respectivamente.
+    const formato = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    resultadoTexto.textContent = `${valor.toLocaleString("es-MX", formato)} ${monedaOrigen} = ${conversion.toLocaleString("es-MX", formato)} ${monedaDestino}`;
+
+    detalleTasa.textContent = `1 ${monedaOrigen} = ${datos.rate.toFixed(5)} ${monedaDestino} · ${datos.date}`;
 //datos.rate es el número que dice cuánto vale una moneda en otra.
 //Piénsalo como cuando vas a una casa de cambio y ves el letrero: “1 euro = 1.08 dólares”. Ese 1.08 es el rate.
   } catch (error) {
